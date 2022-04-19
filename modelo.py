@@ -31,6 +31,9 @@ class Programa:
     def dar_like(self):
         self.likes += 1
 
+    def __str__(self):
+        return f'Nome: {vingadores.nome} - Ano: {vingadores.ano} - Likes: {vingadores.likes}'
+
 class Filme(Programa):
     def __init__(self, nome, ano, duracao):
         super().__init__(nome, ano)
@@ -44,6 +47,9 @@ class Filme(Programa):
     def duracao(self, nova_duracao):
         self.__duracao = nova_duracao
 
+    def __str__(self):
+        return f'Nome: {self.nome} - Ano: {self.ano} - Duração: {self.duracao} - Likes: {self.likes}'
+
 class Serie(Programa):
     def __init__(self, nome, ano, temporadas):
         super().__init__(nome, ano)
@@ -56,6 +62,9 @@ class Serie(Programa):
     @temporadas.setter
     def temporadas(self, nova_temporadas):
         self.__temporadas = nova_temporadas
+    
+    def __str__(self):
+        return f'Nome: {self.nome} - Ano: {self.ano} - Temporadas: {self.temporadas} - Likes: {self.likes}'
 
 vingadores = Filme("vingadores - guera infinita", 2018, 160)
 vingadores.dar_like()
@@ -68,3 +77,18 @@ atlanta.dar_like()
 atlanta.dar_like()
 atlanta.dar_like()
 print(f'Nome: {atlanta.nome} - Ano: {atlanta.ano} - Temporadas: {atlanta.temporadas} - Likes: {atlanta.likes}')
+
+filmes_series = [vingadores, atlanta]
+
+#For com operador ternário
+for programa in filmes_series:
+    # exemplo de Operador Ternário
+    detalhes = f'Duração: {programa.duracao}' if hasattr(programa, 'duracao') else f'Temporadas: {programa.temporadas}'
+    print(f'Nome: {programa.nome} - Ano: {programa.ano} - Likes: {programa.likes} - {detalhes}')
+
+#For correto para usufruir do polimorfismo
+for programa in filmes_series:
+    print(repr(programa))
+    print(programa)
+
+print(repr(filmes_series))
