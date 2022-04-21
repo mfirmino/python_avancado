@@ -76,12 +76,15 @@ class Playlist:
         self.nome = nome
         self._programas = programas
     
+    # Exemplo do uso do Duck Typing
+    def __getitem__(self, item):
+        return self._programas[item]
+
     @property
     def listagem(self):
         return self._programas
 
-    @property
-    def listatamanho(self):
+    def __len__(self):
         return len(self._programas)
 
 vingadores = Filme("vingadores - guera infinita", 2018, 160)
@@ -131,3 +134,16 @@ playlist_fim_de_semana = Playlist('Fim de Semana', filmes_series)
 #For do playlist que não herda a List
 for programas in playlist_fim_de_semana.listagem:
     print(programas)
+
+#Verificar algo dentro da playlist
+print(f'Tá ou não tá ? {demolidor in playlist_fim_de_semana.listagem}')
+
+#For do playlist que não herda a List mas que usa o duck typing
+for programas in playlist_fim_de_semana:
+    print(programas)
+    
+#Verificar algo dentro da playlist com o uso do duck typing
+print(f'Tá ou não tá ? {demolidor in playlist_fim_de_semana}')
+
+#Verificar o tamanho da playlist com o uso do duck typing
+print(f'Tamanho:  {len(playlist_fim_de_semana)}')
