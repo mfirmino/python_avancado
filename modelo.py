@@ -66,9 +66,33 @@ class Serie(Programa):
     def __str__(self):
         return f'Nome: {self.nome} - Ano: {self.ano} - Temporadas: {self.temporadas} - Likes: {self.likes}'
 
+class Playlist_Heranca(list):
+    def __init__(self, nome, programas):
+        self.nome = nome
+        super().__init__(programas)
+
+class Playlist:
+    def __init__(self, nome, programas):
+        self.nome = nome
+        self._programas = programas
+    
+    @property
+    def listagem(self):
+        return self._programas
+
+    @property
+    def listatamanho(self):
+        return len(self._programas)
+
 vingadores = Filme("vingadores - guera infinita", 2018, 160)
 vingadores.dar_like()
-print(f'Nome: {vingadores.nome} - Ano: {vingadores.ano} - Duração: {vingadores.duracao} - Likes: {vingadores.likes}')
+
+demolidor = Serie("demolidor", 2016, 3)
+demolidor.dar_like()
+demolidor.dar_like()
+demolidor.dar_like()
+demolidor.dar_like()
+demolidor.dar_like()
 
 atlanta = Serie("Atlanta", 2018, 2)
 atlanta.dar_like()
@@ -76,7 +100,6 @@ atlanta.dar_like()
 atlanta.dar_like()
 atlanta.dar_like()
 atlanta.dar_like()
-print(f'Nome: {atlanta.nome} - Ano: {atlanta.ano} - Temporadas: {atlanta.temporadas} - Likes: {atlanta.likes}')
 
 filmes_series = [vingadores, atlanta]
 
@@ -92,3 +115,19 @@ for programa in filmes_series:
     print(programa)
 
 print(repr(filmes_series))
+
+filmes_series = [vingadores, atlanta, demolidor]
+playlist_fim_de_semana_heranca = Playlist_Heranca('Fim de Semana', filmes_series)
+
+#For do playlist que herda a List
+for programa in playlist_fim_de_semana_heranca:
+    print(programa)
+
+#Verificar algo dentro da playlist
+print(f'Tá ou não tá ? {demolidor in playlist_fim_de_semana_heranca}')
+
+playlist_fim_de_semana = Playlist('Fim de Semana', filmes_series)
+
+#For do playlist que não herda a List
+for programas in playlist_fim_de_semana.listagem:
+    print(programas)
